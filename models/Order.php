@@ -111,10 +111,10 @@ class Order extends ActiveRecord
         
         $changes = [];
         if ($oldOrderStatus != $newOrderStatus) {
-            $changes[] = "Status pesanan: {$oldOrderStatus} → {$newOrderStatus}";
+            $changes[] = "Pesanan: {$oldOrderStatus} → {$newOrderStatus}";
         }
         if ($oldPaymentStatus != $newPaymentStatus) {
-            $changes[] = "Status pembayaran: {$oldPaymentStatus} → {$newPaymentStatus}";
+            $changes[] = "Pembayaran: {$oldPaymentStatus} → {$newPaymentStatus}";
         }
         
         if (!empty($changes)) {

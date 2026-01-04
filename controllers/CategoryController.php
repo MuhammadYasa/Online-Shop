@@ -126,11 +126,10 @@ class CategoryController extends Controller
             
             // save() = validasi + simpan ke database
             if ($model->save()) {
-                // Jika sukses, set flash message dan redirect
                 Yii::$app->session->setFlash('success', 'Kategori berhasil ditambahkan!');
                 return $this->redirect(['index']);
             } else {
-                // Jika gagal validasi, flash error
+                // Jika gagal validasi
                 Yii::$app->session->setFlash('error', 'Gagal menambahkan kategori. Periksa input Anda.');
             }
         }

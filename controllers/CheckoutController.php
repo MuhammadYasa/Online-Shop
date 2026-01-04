@@ -29,7 +29,6 @@ class CheckoutController extends Controller
         if (!$customerId) {
             // Simpan URL untuk redirect setelah login
             Yii::$app->session->set('returnUrl', Yii::$app->request->url);
-            // Langsung redirect ke login tanpa flash message
             return $this->redirect(['/site/customer-login']);
         }
         
