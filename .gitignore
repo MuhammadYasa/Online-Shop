@@ -40,6 +40,11 @@ tests/_support/_generated
 # Tutorial & Documentation (Personal Notes)
 TUTORIAL_*.md
 ECOMMERCE_FEATURES.md
+CHANGELOG_UI.md
+README_CARA_RUNNING_SQL.md
+CHECKOUT_SECURITY.md
+SETUP_INSTRUCTIONS.md
+
 
 # Database Debug Scripts
 database/DEBUG_*.sql
