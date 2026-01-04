@@ -23,8 +23,17 @@ class CheckoutController extends Controller
      */
     public function actionIndex()
     {
+        // VALIDASI: Customer harus login untuk checkout
+        $customerId = Yii::$app->session->get('customer_id');
+        
+        if (!$customerId) {
+            // Simpan URL untuk redirect setelah login
+            Yii::$app->session->set('returnUrl', Yii::$app->request->url);
+            // Langsung redirect ke login tanpa flash message
+            return $this->redirect(['/site/customer-login']);
+        }
+        
         $sessionId = Yii::$app->session->getId();
-        $customerId = Yii::$app->session->get('customer_id'); // Ambil dari session customer
         
         $items = Cart::getItems($sessionId, $customerId);
         $subtotal = Cart::getTotal($sessionId, $customerId);
@@ -107,10 +116,22 @@ class CheckoutController extends Controller
      */
     public function actionSuccess($id)
     {
+        // VALIDASI: Customer harus login
+        $customerId = Yii::$app->session->get('customer_id');
+        if (!$customerId) {
+            Yii::$app->session->setFlash('error', 'Silakan login untuk melihat pesanan.');
+            return $this->redirect(['/site/customer-login']);
+        }
+        
         $order = Order::findOne($id);
         
         if (!$order) {
             throw new \yii\web\NotFoundHttpException('Pesanan tidak ditemukan.');
+        }
+        
+        // Verify ownership
+        if ($order->customer_id != $customerId) {
+            throw new \yii\web\ForbiddenHttpException('Anda tidak memiliki akses ke pesanan ini.');
         }
         
         return $this->render('success', [
@@ -126,7 +147,7 @@ class CheckoutController extends Controller
         $customerId = Yii::$app->session->get('customer_id');
         if (!$customerId) {
             Yii::$app->session->setFlash('error', 'Silakan login terlebih dahulu.');
-            return $this->redirect(['site/customer-login']);
+            return $this->redirect(['/site/customer-login']);
         }
         
         $orders = Order::find()
@@ -144,15 +165,21 @@ class CheckoutController extends Controller
      */
     public function actionView($id)
     {
+        // VALIDASI: Customer harus login
+        $customerId = Yii::$app->session->get('customer_id');
+        if (!$customerId) {
+            Yii::$app->session->setFlash('error', 'Silakan login untuk melihat detail pesanan.');
+            return $this->redirect(['/site/customer-login']);
+        }
+        
         $order = Order::findOne($id);
         
         if (!$order) {
             throw new \yii\web\NotFoundHttpException('Pesanan tidak ditemukan.');
         }
         
-        // Verify ownership if customer
-        $customerId = Yii::$app->session->get('customer_id');
-        if ($customerId && $order->customer_id != $customerId) {
+        // Verify ownership
+        if ($order->customer_id != $customerId) {
             throw new \yii\web\ForbiddenHttpException('Anda tidak memiliki akses ke pesanan ini.');
         }
         

@@ -137,7 +137,7 @@ class SiteController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Registrasi berhasil! Silakan login.');
-            return $this->redirect(['customer-login']);
+            return $this->redirect(['site/customer-login']);
         }
         
         $this->layout = 'shop';
@@ -152,13 +152,20 @@ class SiteController extends Controller
      */
     public function actionCustomerLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        // Cek apakah customer sudah login (via session, bukan Yii::$app->user)
+        if (Yii::$app->session->get('customer_id')) {
+            return $this->redirect(['site/index']);
         }
 
         $model = new CustomerLoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['index']);
+            // Redirect ke halaman yang dituju (returnUrl) atau ke home
+            $returnUrl = Yii::$app->session->get('returnUrl');
+            if ($returnUrl) {
+                Yii::$app->session->remove('returnUrl');
+                return $this->redirect($returnUrl);
+            }
+            return $this->redirect(['site/index']);
         }
 
         $model->password = '';

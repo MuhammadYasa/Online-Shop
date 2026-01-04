@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /** @var int $totalCount */
 
 $this->title = 'Daftar Tag';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-index">
 

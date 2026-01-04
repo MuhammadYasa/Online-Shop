@@ -7,8 +7,8 @@ use yii\widgets\ActiveForm;
 /** @var app\models\Tag $model */
 
 $this->title = 'Tambah Tag';
-$this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-create">
 

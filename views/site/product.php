@@ -11,12 +11,12 @@ $this->title = $product->name;
 
 <div class="product-detail">
     
-    <nav aria-label="breadcrumb">
+    <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?= Url::to(['site/index']) ?>">Home</a></li>
             <li class="breadcrumb-item active"><?= Html::encode($product->name) ?></li>
         </ol>
-    </nav>
+    </nav> -->
 
     <div class="row">
         <!-- Product Image -->

@@ -7,10 +7,10 @@ use yii\helpers\Html;
 /** @var app\models\Category[] $categories */
 /** @var app\models\Tag[] $tags */
 
-$this->title = 'Update Produk: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Produk', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+    $this->title = 'Update Produk: ' . $model->name;
+    // $this->params['breadcrumbs'][] = ['label' => 'Produk', 'url' => ['index']];
+    // $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+    // $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="product-update">
 

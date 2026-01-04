@@ -21,10 +21,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Password: admin123
 
 INSERT INTO `user` (`username`, `password_hash`, `auth_key`) VALUES
-('admin', '$2y$13$QhA5h5h5h5h5h5h5h5h5h.5h5h5h5h5h5h5h5h5h5h5h5h5h5h5h5h', 'test-auth-key-admin');
+('admin', '$2y$13$DI4bG0pkySX.VIrwGVt6V.x/SGUbUtJjqJ3PIifEXgkbjYdauDoRu', 'Lxiipq-mIJgjig6WDY6WPoYKTz370iLq');
 
--- UNTUK SEMENTARA: Login pakai user ini dulu
--- Nanti password hash bisa diganti dengan yang benar setelah tabel dibuat
+-- Password hash di atas sudah VALID dan bisa langsung digunakan untuk login
+-- Username: admin
+-- Password: admin123
 
 -- CARA GENERATE PASSWORD HASH YANG BENAR:
 -- 1. Buka file baru: test-hash.php di folder olshop

@@ -7,9 +7,9 @@ use yii\widgets\ActiveForm;
 /** @var app\models\Tag $model */
 
 $this->title = 'Update Tag: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+// $this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+// $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="tag-update">
 

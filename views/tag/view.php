@@ -7,8 +7,8 @@ use yii\helpers\Url;
 /** @var app\models\Tag $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-view">
 

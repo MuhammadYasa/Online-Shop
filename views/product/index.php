@@ -13,7 +13,7 @@ use yii\helpers\ArrayHelper;
 /** @var int $selectedTag */
 
 $this->title = 'Daftar Produk';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;   
 ?>
 <div class="product-index">
 

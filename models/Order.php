@@ -94,4 +94,39 @@ class Order extends ActiveRecord
         ];
         return $badges[$this->order_status] ?? $this->order_status;
     }
+
+    // Get status history as array
+    public function getStatusHistory()
+    {
+        if (empty($this->status_history)) {
+            return [];
+        }
+        return json_decode($this->status_history, true) ?? [];
+    }
+
+    // Add status change to history
+    public function addStatusHistory($oldOrderStatus, $newOrderStatus, $oldPaymentStatus, $newPaymentStatus)
+    {
+        $history = $this->getStatusHistory();
+        
+        $changes = [];
+        if ($oldOrderStatus != $newOrderStatus) {
+            $changes[] = "Status pesanan: {$oldOrderStatus} → {$newOrderStatus}";
+        }
+        if ($oldPaymentStatus != $newPaymentStatus) {
+            $changes[] = "Status pembayaran: {$oldPaymentStatus} → {$newPaymentStatus}";
+        }
+        
+        if (!empty($changes)) {
+            $history[] = [
+                'timestamp' => date('Y-m-d H:i:s'),
+                'order_status' => $newOrderStatus,
+                'payment_status' => $newPaymentStatus,
+                'changes' => implode(', ', $changes),
+                'admin' => Yii::$app->user->identity->username ?? 'System'
+            ];
+            
+            $this->status_history = json_encode($history);
+        }
+    }
 }

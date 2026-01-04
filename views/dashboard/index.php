@@ -13,17 +13,17 @@ use yii\helpers\Url;
 /* @var $lowStockProducts app\models\Product[] */
 
 $this->title = 'Dashboard';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="dashboard-index">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1><i class="fas fa-tachometer-alt"></i> <?= Html::encode($this->title) ?></h1>
         <div>
-            <span class="text-muted">
+            <!-- <span class="text-muted">
                 <i class="far fa-calendar"></i> 
                 <?= date('d F Y, H:i') ?>
-            </span>
+            </span> -->
         </div>
     </div>
 

@@ -8,8 +8,8 @@ use yii\helpers\Html;
 /** @var app\models\Tag[] $tags */
 
 $this->title = 'Tambah Produk Baru';
-$this->params['breadcrumbs'][] = ['label' => 'Produk', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => 'Produk', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-create">
 

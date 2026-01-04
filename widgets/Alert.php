@@ -57,6 +57,22 @@ class Alert extends \yii\bootstrap5\Widget
             $flash = $session->getFlash($type);
 
             foreach ((array) $flash as $i => $message) {
+                // Support untuk custom message dengan array
+                if (is_array($message) && isset($message['message'])) {
+                    $messageText = $message['message'];
+                    
+                    // Jika ada flag showLoginButton, tambahkan tombol
+                    if (isset($message['showLoginButton']) && $message['showLoginButton']) {
+                        $messageText .= '<div class="mt-3">';
+                        $messageText .= '<a href="' . \yii\helpers\Url::to(['/site/customer-login']) . '" class="btn btn-primary">';
+                        $messageText .= '<i class="fas fa-sign-in-alt"></i> Login Sekarang';
+                        $messageText .= '</a>';
+                        $messageText .= '</div>';
+                    }
+                    
+                    $message = $messageText;
+                }
+                
                 echo \yii\bootstrap5\Alert::widget([
                     'body' => $message,
                     'closeButton' => $this->closeButton,

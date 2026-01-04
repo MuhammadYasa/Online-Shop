@@ -140,29 +140,79 @@ $this->title = 'Detail Pesanan #' . $order->order_number;
             
             <!-- Order Timeline -->
             <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Status Pesanan</h5>
+                <div class="card-header text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h5 class="mb-0"><i class="fas fa-history"></i> Status Pesanan</h5>
                 </div>
                 <div class="card-body">
-                    <ul class="timeline">
-                        <li class="<?= in_array($order->order_status, ['pending', 'processing', 'shipped', 'delivered']) ? 'completed' : '' ?>">
-                            <i class="fas fa-check-circle"></i>
-                            <strong>Pesanan Dibuat</strong><br>
-                            <small><?= Yii::$app->formatter->asDate($order->created_at, 'php:d M Y H:i') ?></small>
-                        </li>
-                        <li class="<?= in_array($order->order_status, ['processing', 'shipped', 'delivered']) ? 'completed' : '' ?>">
-                            <i class="fas fa-spinner"></i>
-                            <strong>Diproses</strong>
-                        </li>
-                        <li class="<?= in_array($order->order_status, ['shipped', 'delivered']) ? 'completed' : '' ?>">
-                            <i class="fas fa-shipping-fast"></i>
-                            <strong>Dikirim</strong>
-                        </li>
-                        <li class="<?= $order->order_status === 'delivered' ? 'completed' : '' ?>">
-                            <i class="fas fa-box-open"></i>
-                            <strong>Diterima</strong>
-                        </li>
-                    </ul>
+                    
+                    <!-- Status Saat Ini -->
+                    <div class="alert alert-info mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Status Saat Ini:</strong><br>
+                                <?= $order->getOrderStatusBadge() ?>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted">Pembayaran:</small><br>
+                                <?= $order->getPaymentStatusBadge() ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline dengan History -->
+                    <?php if (!empty($order->statusHistory)): ?>
+                    <h6 class="mb-3"><i class="fas fa-timeline"></i> Riwayat Status</h6>
+                    <div class="status-timeline">
+                        <?php 
+                        $history = array_reverse($order->statusHistory); 
+                        foreach ($history as $index => $item): 
+                        ?>
+                        <div class="timeline-item <?= $index == 0 ? 'latest' : '' ?>">
+                            <div class="timeline-marker">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <strong><?= htmlspecialchars($item['changes']) ?></strong>
+                                <div class="small text-muted mt-1">
+                                    <i class="far fa-clock"></i> 
+                                    <?= date('d M Y, H:i', strtotime($item['timestamp'])) ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                        
+                        <!-- Status Awal -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <strong>Pesanan Dibuat</strong>
+                                <div class="small text-muted mt-1">
+                                    <i class="far fa-clock"></i> 
+                                    <?= date('d M Y, H:i', strtotime($order->created_at)) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php else: ?>
+                    <!-- Timeline Default (jika belum ada history) -->
+                    <div class="status-timeline">
+                        <div class="timeline-item latest">
+                            <div class="timeline-marker">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <strong>Pesanan Dibuat</strong>
+                                <div class="small text-muted mt-1">
+                                    <i class="far fa-clock"></i> 
+                                    <?= date('d M Y, H:i', strtotime($order->created_at)) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
                 </div>
             </div>
             
@@ -173,31 +223,84 @@ $this->title = 'Detail Pesanan #' . $order->order_number;
 </div>
 
 <style>
-.timeline {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.timeline li {
-    padding: 15px 0 15px 40px;
+/* Timeline Customer */
+.status-timeline {
     position: relative;
-    border-left: 2px solid #ddd;
+    padding: 0;
 }
-.timeline li:last-child {
-    border-left: 0;
-}
-.timeline li i {
+
+.status-timeline::before {
+    content: '';
     position: absolute;
-    left: -12px;
-    top: 15px;
-    background: #fff;
-    color: #ddd;
-    font-size: 20px;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    width: 2px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
 }
-.timeline li.completed {
-    border-left-color: #28a745;
+
+.timeline-item {
+    position: relative;
+    padding-left: 35px;
+    padding-bottom: 25px;
 }
-.timeline li.completed i {
-    color: #28a745;
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #667eea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.timeline-item.latest .timeline-marker {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    animation: pulse-customer 2s infinite;
+}
+
+.timeline-item.latest .timeline-marker i {
+    color: white;
+}
+
+.timeline-marker i {
+    font-size: 8px;
+    color: #667eea;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 3px solid #667eea;
+}
+
+.timeline-item.latest .timeline-content {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-left-color: #764ba2;
+}
+
+@keyframes pulse-customer {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(102, 126, 234, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
 }
 </style>

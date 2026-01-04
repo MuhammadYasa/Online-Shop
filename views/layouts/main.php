@@ -23,10 +23,40 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 // Font Awesome untuk icons
 $this->registerCssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-// Custom CSS untuk sidebar
+// Custom CSS untuk sidebar dan navbar
 $this->registerCss("
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8f9fa;
+    }
+    
+    /* NAVBAR STYLING */
+    .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+        font-size: 1.5em !important;
+        font-weight: bold !important;
+        color: #fff !important;
+    }
+    
+    .navbar .nav-link {
+        color: #fff !important;
+        transition: all 0.3s;
+    }
+    
+    .navbar .nav-link:hover {
+        color: #ffd700 !important;
+    }
+    
+    .navbar .btn-link {
+        color: #fff !important;
+    }
+    
+    .navbar .btn-link:hover {
+        color: #ffd700 !important;
     }
     
     .wrapper {
@@ -38,7 +68,7 @@ $this->registerCss("
     #sidebar {
         min-width: 250px;
         max-width: 250px;
-        background: #2c3e50;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
         color: #fff;
         transition: all 0.3s;
         height: 100vh;
@@ -47,6 +77,7 @@ $this->registerCss("
         left: 0;
         z-index: 999;
         overflow-y: auto;
+        box-shadow: 3px 0 15px rgba(0,0,0,0.1);
     }
     
     #sidebar.active {
@@ -55,7 +86,19 @@ $this->registerCss("
     
     #sidebar .sidebar-header {
         padding: 20px;
-        background: #34495e;
+        background: rgba(0,0,0,0.2);
+        border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    #sidebar .sidebar-header h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    #sidebar .sidebar-header small {
+        opacity: 0.8;
+        font-size: 0.85rem;
     }
     
     #sidebar ul.components {
@@ -63,28 +106,39 @@ $this->registerCss("
     }
     
     #sidebar ul li {
-        padding: 10px;
-        border-bottom: 1px solid #34495e;
+        padding: 5px 15px;
+        border-bottom: none;
     }
     
     #sidebar ul li a {
-        padding: 10px;
-        font-size: 1em;
+        padding: 12px 15px;
+        font-size: 0.95em;
         display: block;
-        color: #ecf0f1;
+        color: rgba(255,255,255,0.9);
         text-decoration: none;
         transition: all 0.3s;
+        border-radius: 8px;
+        font-weight: 500;
     }
     
-    #sidebar ul li a:hover,
+    #sidebar ul li a:hover {
+        color: #fff;
+        background: rgba(255,255,255,0.2);
+        transform: translateX(5px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
     #sidebar ul li a.active {
         color: #fff;
-        background: #34495e;
-        border-radius: 5px;
+        background: rgba(255,255,255,0.25);
+        border-left: 4px solid #fff;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
     }
     
     #sidebar ul li a i {
         margin-right: 10px;
+        width: 20px;
+        text-align: center;
     }
     
     #content {
@@ -94,6 +148,7 @@ $this->registerCss("
         transition: all 0.3s;
         margin-left: 250px;
         margin-top: 56px;
+        background: #f8f9fa;
     }
     
     #content.active {
@@ -101,16 +156,21 @@ $this->registerCss("
     }
     
     #sidebarCollapse {
-        background: #34495e;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border: none;
         color: #fff;
         padding: 10px 20px;
         cursor: pointer;
         margin-bottom: 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s;
     }
     
     #sidebarCollapse:hover {
-        background: #2c3e50;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
     
     @media (max-width: 768px) {
@@ -140,9 +200,9 @@ $this->registerCss("
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => '<i class="fas fa-store"></i> ' . Yii::$app->name,
+        'brandLabel' => '<i class="fas fa-shopping-bag"></i> My Olshop',
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top'],
+        'options' => ['class' => 'navbar-expand-md navbar-dark fixed-top'],
         'renderInnerContainer' => true,
         'innerContainerOptions' => ['class' => 'container-fluid']
     ]);
@@ -194,6 +254,11 @@ $this->registerCss("
             <li>
                 <a href="<?= Url::to(['/tag/index']) ?>" class="<?= Yii::$app->controller->id === 'tag' ? 'active' : '' ?>">
                     <i class="fas fa-tags"></i> Tag
+                </a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['/order/index']) ?>" class="<?= Yii::$app->controller->id === 'order' ? 'active' : '' ?>">
+                    <i class="fas fa-shopping-cart"></i> Pesanan
                 </a>
             </li>
             <li>
