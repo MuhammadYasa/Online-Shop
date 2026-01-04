@@ -201,8 +201,8 @@ This project is licensed under the MIT License.
 
 For support or inquiries:
 
-- Email: info@myolshop.com
-- Phone: 08123456789
+- Email: nearhxh@gmail.com
+- Phone: 085732065777
 
 ---
 
