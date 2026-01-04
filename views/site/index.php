@@ -14,11 +14,11 @@ $this->title = 'Home';
 
     <!-- HERO SECTION -->
     <div class="hero-section mb-5">
-        <div class="jumbotron bg-gradient p-5 rounded text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            <h1 class="display-4"><i class="fas fa-gift"></i> Selamat Datang di My Olshop!</h1>
-            <p class="lead">Belanja produk berkualitas dengan harga terbaik. Pengiriman cepat ke seluruh Indonesia.</p>
-            <hr class="my-4" style="border-color: rgba(255,255,255,0.3);">
-            <p>Gratis ongkir untuk pembelian di atas Rp 100.000</p>
+        <div class="jumbotron bg-gradient p-5 rounded shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <h1 class="display-4 fw-bold" style="color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"><i class="fas fa-gift"></i> Selamat Datang di My Olshop!</h1>
+            <p class="lead" style="color: #f8f9fa; text-shadow: 1px 1px 3px rgba(0,0,0,0.15);">Belanja produk berkualitas dengan harga terbaik. Pengiriman cepat ke seluruh Indonesia.</p>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.4); border-width: 2px;">
+            <p class="mb-0" style="color: #fff; font-weight: 500; text-shadow: 1px 1px 2px rgba(0,0,0,0.15);"><i class="fas fa-truck"></i> Gratis ongkir untuk pembelian di atas Rp 100.000</p>
         </div>
     </div>
 

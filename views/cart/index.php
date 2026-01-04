@@ -10,7 +10,7 @@ use yii\helpers\Url;
 $this->title = 'Keranjang Belanja';
 ?>
 
-<div class="cart-index">
+<div class="cart-index" style="min-height: 60vh;">
     
     <h2><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h2>
     <hr>

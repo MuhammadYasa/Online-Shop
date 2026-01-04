@@ -194,7 +194,7 @@ $this->registerCss("
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
 <header id="header">
@@ -271,7 +271,7 @@ $this->registerCss("
     <?php endif; ?>
 
     <!-- CONTENT AREA -->
-    <div id="content" class="<?= Yii::$app->user->isGuest ? 'active' : '' ?>">
+    <div id="content" class="<?= Yii::$app->user->isGuest ? 'active' : '' ?>" style="flex: 1 0 auto;">
         <?php if (!Yii::$app->user->isGuest): ?>
         <button type="button" id="sidebarCollapse" class="btn btn-sm">
             <i class="fas fa-bars"></i> Toggle Menu
@@ -288,7 +288,7 @@ $this->registerCss("
     </div>
 </div>
 
-<footer id="footer" class="bg-light py-3" style="<?= !Yii::$app->user->isGuest ? 'margin-left: 250px;' : '' ?>">
+<footer id="footer" class="bg-light py-3 mt-auto" style="<?= !Yii::$app->user->isGuest ? 'margin-left: 250px;' : '' ?>; flex-shrink: 0;">
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; Olshop <?= date('Y') ?></div>

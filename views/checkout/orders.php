@@ -9,7 +9,7 @@ use yii\helpers\Url;
 $this->title = 'Pesanan Saya';
 ?>
 
-<div class="checkout-orders">
+<div class="checkout-orders" style="min-height: 60vh;">
     
     <h2><i class="fas fa-list"></i> Pesanan Saya</h2>
     <hr>
